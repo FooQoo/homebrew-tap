@@ -1,6 +1,6 @@
 # FooQoo/homebrew-tap
 
-Homebrew tap for Agent Project.
+Homebrew tap for [Agent Project](https://github.com/FooQoo/agent-project).
 
 ```sh
 brew install fooqoo/tap/agpj
@@ -8,31 +8,25 @@ brew upgrade fooqoo/tap/agpj
 ```
 
 `Formula/agpj.rb` is generated, not edited by hand. It requires macOS 15 or
-later and installs the prebuilt, signed binary from the Release of the same tag
-in FooQoo/agent-project.
+later and installs the prebuilt, signed binary from the Release of the same tag.
 
-## Agent Board (agboard)
+## The preserved `agboard` Formula
 
-Agent Board was renamed to Agent Project in v2.0.0. `Formula/agboard.rb` keeps
-the last Agent Board, v1.7.0, as it was, and is no longer updated:
-
-```sh
-brew install fooqoo/tap/agboard
-```
-
-The two formulas install different commands (`agpj` and `agboard`) and can be
-installed side by side.
+Agent Project was called Agent Board, with the command `agboard`, up to v1.7.0.
+`Formula/agboard.rb` stays at v1.7.0 and receives no further updates. New
+installs should use `agpj`.
 
 ## What this repository receives
 
-Only two files change:
+Only these files change:
 
 - `Formula/agpj.rb`, rendered by `scripts/release/render-formula.py` in
   FooQoo/agent-project.
-- This README, when the install or upgrade wording changes.
+- This README, through a pull request, when the install or upgrade wording
+  changes.
 
-Nothing else is copied from FooQoo/agent-project: no archives, no scripts, no
-tokens.
+`Formula/agboard.rb` is not changed. Nothing else is copied from
+FooQoo/agent-project: no archives, no scripts, no tokens.
 
 `Formula/agpj.rb` is pushed to the default branch by the `homebrew-tap`
 workflow of FooQoo/agent-project when a Release is published, using a deploy key
@@ -48,7 +42,7 @@ The workflow normally does this. Update the Formula by hand only when all of the
 2. Both archives were built, signed with Developer ID and notarized
    (Accepted) before packing. The `SHA256SUMS` comes from those same bytes.
 3. Download the published `SHA256SUMS` and both archives into one empty
-   directory, and render from them:
+   directory. Then, in a checkout of FooQoo/agent-project, render from them:
 
    ```sh
    python3 scripts/release/render-formula.py --tag vX.Y.Z \
